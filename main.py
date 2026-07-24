@@ -66,5 +66,30 @@ def delete(post_id):
     return redirect(url_for("index"))
 
 
+@app.route("/update/<int:post_id>", methods=["GET", "POST"])
+def update(post_id):
+    """Update an existing blog post."""
+    posts = load_posts()
+
+    post = next(
+        (post for post in posts if post["id"] == post_id),
+        None,
+    )
+
+    if post is None:
+        return "Post not found", 404
+
+    if request.method == "POST":
+        post["author"] = request.form.get("author")
+        post["title"] = request.form.get("title")
+        post["content"] = request.form.get("content")
+
+        save_posts(posts)
+        return redirect(url_for("index"))
+
+    return render_template("update.html", post=post)
+
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
