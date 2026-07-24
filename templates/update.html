@@ -7,33 +7,33 @@
 <body>
 <h1>Update Blog Post</h1>
 
-<form method="POST">
-    <label for="author">Author:</label>
+<form action="{{ url_for('update', post_id=post['id']) }}" method="POST">
+    <label for="author">Author:</label><br>
     <input
-            type="text"
-            id="author"
-            name="author"
-            value="{{ post.author }}"
-            required
-    >
+        type="text"
+        id="author"
+        name="author"
+        value="{{ post['author'] }}"
+        required
+    ><br>
 
-    <label for="title">Title:</label>
+    <label for="title">Title:</label><br>
     <input
-            type="text"
-            id="title"
-            name="title"
-            value="{{ post.title }}"
-            required
-    >
+        type="text"
+        id="title"
+        name="title"
+        value="{{ post['title'] }}"
+        required
+    ><br>
 
-    <label for="content">Content:</label>
+    <label for="content">Content:</label><br>
     <textarea
-            id="content"
-            name="content"
-            required
-    >{{ post.content }}</textarea>
+        id="content"
+        name="content"
+        required
+    >{{ post['content'] }}</textarea><br>
 
-    <button type="submit">Update Post</button>
+    <input type="submit" value="Update">
 </form>
 </body>
 </html>
